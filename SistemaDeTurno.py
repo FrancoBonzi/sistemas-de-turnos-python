@@ -58,6 +58,45 @@ def pedirHora():
         return hora
 
 
+def Salir():
+
+    limpiarPantalla()
+    print("Cerrando el sistema.")
+    sys.exit()
 
 
+def MenuPrincipal():
 
+    print(" -------- SISTEMAS DE TURNOS -------- \n")
+
+    print(" 1 > Alta Turno ")
+
+    print(" 2 > Buscar Turno por su número")
+
+    print(" 3 > Salir")
+
+    print("----------------------------------------")
+
+    opcion = input("Ingrese la opción seleccionada: ")
+
+    if not opcion.isdigit():
+
+        print("ERROR: LA OPCIÓN DEBE SER UN NÚMERO VÁLIDO.\n")
+
+        opcion = input("Ingrese la opción seleccionada: ")
+
+    opcion = int(opcion)
+
+    if opcion == 1:
+        #AltaTurno()
+    elif opcion == 2:
+        #BuscarTurnoPorNumero
+    elif opcion == 3:
+        Salir()
+        break
+    else:
+        print("LA OPCIÓN INGRESADA ES INCORRECTA. INTENTE DE NUEVO.")   
+        input("Presione ENTER para continuar....")
+
+
+MenuPrincipal()         
