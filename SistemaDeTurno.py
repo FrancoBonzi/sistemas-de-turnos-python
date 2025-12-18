@@ -108,7 +108,7 @@ def AltaTurno():
 
         numeroTurno = random.randrange(1000,9999)
 
-        while numeroTurno(numeroDeTurnoExiste):
+        while numeroTurno(str(numeroDeTurnoExiste)):
             numeroTurno = random.randrange(1000,9999)
 
         limpiarPantalla()
@@ -143,7 +143,7 @@ def BuscarTurnoPorNumero():
 
         numero_Turno = input("Ingrese el número del turno que está buscando: ")
 
-        if os.path.exists("turnos.txt"):
+        if not os.path.exists("turnos.txt"):
             print("Aún no hay datos cargados... \n")
             input("Presione ENTER para continuar.")
             return
@@ -186,6 +186,41 @@ def BuscarTurnoPorNumero():
             if respuesta == 'n':
                 return    
 
+def EliminarTurno():
+
+    limpiarPantalla()
+
+    if not os.path.exists("turnos.txt"):
+        print("No hay turnos cargados.")
+        input("ENTER para continuar...")
+        return
+
+    numero = input("Ingrese el número de turno a eliminar: ")
+
+    turnos = []
+    eliminado = False
+
+    with open("turnos.txt", "r", encoding="utf-8") as archivo:
+        for linea in archivo:
+            partes = linea.strip().split("|")
+            if partes[0] == numero:
+                eliminado = True
+            else:
+                turnos.append(linea)
+
+    if not eliminado:
+        print("El número de turno no existe.")
+        input("ENTER para continuar...")
+        return
+
+    with open("turnos.txt", "w", encoding="utf-8") as archivo:
+        for t in turnos:
+            archivo.write(t)
+
+    print("Turno eliminado correctamente.")
+    input("ENTER para continuar...")
+
+
 
 def ListarTurnos():
    
@@ -221,6 +256,9 @@ def Salir():
 def MenuPrincipal():
 
     while True:
+
+        limpiarPantalla()
+
         print(" -------- SISTEMAS DE TURNOS -------- \n")
 
         print(" 1 > Alta Turno ")
