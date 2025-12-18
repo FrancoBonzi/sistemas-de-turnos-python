@@ -108,7 +108,7 @@ def AltaTurno():
 
         numeroTurno = random.randrange(1000,9999)
 
-        while numeroTurno(str(numeroDeTurnoExiste)):
+        while numeroDeTurnoExiste(str(numeroTurno)):
             numeroTurno = random.randrange(1000,9999)
 
         limpiarPantalla()
@@ -224,8 +224,6 @@ def EliminarTurno():
 
 def ListarTurnos():
    
-    while True:
-
         limpiarPantalla()
 
         if not os.path.exists("turnos.txt"):
@@ -246,6 +244,62 @@ def ListarTurnos():
 
         input("\nENTER para continuar...")
 
+def ModificarTurno():
+
+    limpiarPantalla()
+
+    if not os.path.exists("turnos.txt"):
+        print("No hay turnos cargados.")
+        input("ENTER para continuar...")
+        return
+
+    numero = input("Ingrese el número de turno a editar: ")
+
+    turnos = []
+    encontrado = False
+
+    with open("turnos.txt", "r", encoding="utf-8") as archivo:
+        for linea in archivo:
+            partes = linea.strip().split("|")
+
+            if partes[0] == numero:
+                encontrado = True
+
+                print("\nTurno encontrado:")
+                print(f"Nombre: {partes[1]} {partes[2]}")
+                print(f"Fecha actual: {partes[3]}")
+                print(f"Hora actual: {partes[4]}")
+                print(f"Motivo actual: {partes[5]}")
+
+                nueva_fecha = pedirFecha()
+                nueva_hora = pedirHora()
+
+                while turnoFechayHoraExiste(nueva_fecha, nueva_hora):
+                    print("Ya existe un turno en esa fecha y hora.")
+                    nueva_fecha = pedirFecha()
+                    nueva_hora = pedirHora()
+
+                nuevo_motivo = input("Ingrese el nuevo motivo: ")
+
+                nueva_linea = f"{numero}|{partes[1]}|{partes[2]}|{nueva_fecha}|{nueva_hora}|{nuevo_motivo}\n"
+                turnos.append(nueva_linea)
+
+            else:
+                turnos.append(linea)
+
+    if not encontrado:
+        print("El número de turno no existe.")
+        input("ENTER para continuar...")
+        return
+
+    with open("turnos.txt", "w", encoding="utf-8") as archivo:
+        for t in turnos:
+            archivo.write(t)
+
+    print("Turno editado correctamente.")
+    input("ENTER para continuar...")
+
+
 def Salir():
 
     limpiarPantalla()
@@ -265,7 +319,11 @@ def MenuPrincipal():
 
         print(" 2 > Buscar Turno por su número")
 
-        print(" 3 > Listar Turnos")
+        print(" 3 > Eliminar Turno")
+
+        print(" 4 > Listar Turno")
+
+        print(" 5 > Modificar Turno")
 
         print(" 0 > Salir")
 
@@ -286,7 +344,11 @@ def MenuPrincipal():
         elif opcion == 2:
             BuscarTurnoPorNumero()
         elif opcion == 3:
+            EliminarTurno()
+        elif opcion == 4:
             ListarTurnos()
+        elif opcion == 5:
+            ModificarTurno()
         elif opcion == 0:
             Salir()
         else:
