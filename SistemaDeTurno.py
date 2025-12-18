@@ -97,6 +97,57 @@ def AltaTurno():
         if respuesta == 'n':
             return    
 
+def BuscarTurnoPorNumero():
+
+    while True:
+
+        limpiarPantalla()
+
+        numero_Turno = input("Ingrese el número del turno que está buscando: ")
+
+        if os.path.exists("turnos.txt"):
+            print("Aún no hay datos cargados... \n")
+            input("Presione ENTER para continuar.")
+            return
+
+        fueEncontrado = False
+
+        with open("turnos.txt","r",encoding="utf-8") as archivo:
+
+            for linea in archivo:
+                partes = linea.strip().split("|")
+
+                if partes[0] == numero_Turno:
+
+                    limpiarPantalla()
+
+                    print("=== TURNO ENCONTRADO === \n")
+                    print(f"Número del turno: {partes[0]}")
+                    print(f"Nombre: {partes[1]}")
+                    print(f"Apellido: {partes[2]}")
+                    print(f"Fecha: {partes[3]}")
+                    print(f"Hora: {partes[4]}")
+                    print(f"Motivo: {partes[5]}")
+
+                    print("=========================\n")
+
+                    fueEncontrado = True
+                    break
+            
+            if not fueEncontrado:
+                print("El número de turno ingresado no fue encontrado.")
+
+            respuesta = input("¿Desea buscar otro número de turno (s/n): ").lower()
+
+            while respuesta != 's' and respuesta != 'n':
+                print("Error: Debes ingresar 's' o 'n'. \n")
+
+                respuesta = input("¿Desea ingresar 's' o 'n'. \n").lower()
+
+
+            if respuesta == 'n':
+                return    
+
 
 def Salir():
 
@@ -130,10 +181,9 @@ def MenuPrincipal():
     if opcion == 1:
         AltaTurno()
     elif opcion == 2:
-        #BuscarTurnoPorNumero
+        BuscarTurnoPorNumero
     elif opcion == 3:
         Salir()
-        break
     else:
         print("LA OPCIÓN INGRESADA ES INCORRECTA. INTENTE DE NUEVO.")   
         input("Presione ENTER para continuar....")
