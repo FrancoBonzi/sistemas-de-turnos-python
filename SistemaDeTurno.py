@@ -85,8 +85,8 @@ def AltaTurno():
         print("==========================")
 
         with open("turnos.txt","a",encoding="utf-8") as archivo:
-            archivo.write(f"{numeroTurno}|{nombre}|{apellido}|{fecha}|{hora}|{motivo}")
 
+            archivo.write(f"{numeroTurno}|{nombre}|{apellido}|{fecha}|{hora}|{motivo}\n")
         respuesta = input("¿Desea agregar otro turno? (s/n): ").lower()
 
         while respuesta != 's' and respuesta != 'n':
@@ -158,35 +158,36 @@ def Salir():
 
 def MenuPrincipal():
 
-    print(" -------- SISTEMAS DE TURNOS -------- \n")
+    while True:
+        print(" -------- SISTEMAS DE TURNOS -------- \n")
 
-    print(" 1 > Alta Turno ")
+        print(" 1 > Alta Turno ")
 
-    print(" 2 > Buscar Turno por su número")
+        print(" 2 > Buscar Turno por su número")
 
-    print(" 3 > Salir")
+        print(" 3 > Salir")
 
-    print("----------------------------------------")
+        print("----------------------------------------")
 
-    opcion = input("Ingrese la opción seleccionada: ")
+        opcion = (input(f"Ingrese la opción seleccionada: "))
 
-    if not opcion.isdigit():
+        if not opcion.isdigit():
 
-        print("ERROR: LA OPCIÓN DEBE SER UN NÚMERO VÁLIDO.\n")
+            print("ERROR: LA OPCIÓN DEBE SER UN NÚMERO VÁLIDO.\n")
+            input("Presione ENTER para continuar...")
+            continue
 
-        opcion = input("Ingrese la opción seleccionada: ")
+        opcion = int(opcion)
 
-    opcion = int(opcion)
-
-    if opcion == 1:
-        AltaTurno()
-    elif opcion == 2:
-        BuscarTurnoPorNumero
-    elif opcion == 3:
-        Salir()
-    else:
-        print("LA OPCIÓN INGRESADA ES INCORRECTA. INTENTE DE NUEVO.")   
-        input("Presione ENTER para continuar....")
+        if opcion == 1:
+            AltaTurno()
+        elif opcion == 2:
+            BuscarTurnoPorNumero()
+        elif opcion == 3:
+            Salir()
+        else:
+            print("LA OPCIÓN INGRESADA ES INCORRECTA. INTENTE DE NUEVO.")   
+            input("Presione ENTER para continuar....")
 
 
 MenuPrincipal()         
