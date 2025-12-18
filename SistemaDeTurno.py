@@ -98,9 +98,18 @@ def AltaTurno():
         fecha = pedirFecha()
         hora = pedirHora()
 
+        while turnoFechayHoraExiste(fecha,hora):
+            print("Ya existe un turno a esa hora y fecha")
+
+            fecha = pedirFecha()
+            hora = pedirHora()
+
         motivo = input("Ingrese el motivo del turno: ")
 
-        numeroTurno = random.randrange(1,1000)
+        numeroTurno = random.randrange(1000,9999)
+
+        while numeroTurno(numeroDeTurnoExiste):
+            numeroTurno = random.randrange(1000,9999)
 
         limpiarPantalla()
 
@@ -178,6 +187,30 @@ def BuscarTurnoPorNumero():
                 return    
 
 
+def ListarTurnos():
+   
+    while True:
+
+        limpiarPantalla()
+
+        if not os.path.exists("turnos.txt"):
+            print("No hay turnos cargados.")
+            input("ENTER para continuar...")
+            return
+
+        print("====== LISTADO DE TURNOS ======\n")
+
+        with open("turnos.txt", "r", encoding="utf-8") as archivo:
+            for linea in archivo:
+                partes = linea.strip().split("|")
+                print(f"N° Turno: {partes[0]}")
+                print(f"Nombre: {partes[1]} {partes[2]}")
+                print(f"Fecha: {partes[3]}  Hora: {partes[4]}")
+                print(f"Motivo: {partes[5]}")
+                print("------------------------------")
+
+        input("\nENTER para continuar...")
+
 def Salir():
 
     limpiarPantalla()
@@ -194,7 +227,9 @@ def MenuPrincipal():
 
         print(" 2 > Buscar Turno por su número")
 
-        print(" 3 > Salir")
+        print(" 3 > Listar Turnos")
+
+        print(" 0 > Salir")
 
         print("----------------------------------------")
 
@@ -213,6 +248,8 @@ def MenuPrincipal():
         elif opcion == 2:
             BuscarTurnoPorNumero()
         elif opcion == 3:
+            ListarTurnos()
+        elif opcion == 0:
             Salir()
         else:
             print("LA OPCIÓN INGRESADA ES INCORRECTA. INTENTE DE NUEVO.")   
