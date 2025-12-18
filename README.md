@@ -1,24 +1,20 @@
 # 📅 Sistema de Turnos en Python
 
-Mini aplicación de consola desarrollada en **Python**, que permite la gestión básica de turnos mediante archivos de texto.  
+Mini aplicación de consola desarrollada en **Python**, que permite la gestión básica de turnos utilizando archivos de texto.  
 
 ## 🧩 Funcionalidades
 
 El sistema permite:
 
-- ✅ **Dar de alta turnos**
-- 🔍 **Buscar turnos por número**
-- 📋 **Listar todos los turnos registrados**
-- ✏️ **Modificar un turno existente**
-- 🗑️ **Eliminar un turno**
-- 🚫 **Evitar turnos duplicados** (misma fecha y hora)
-- 🔢 **Evitar números de turno repetidos**
-
-Toda la información se almacena en un archivo de texto (`turnos.txt`).
+- Dar de alta turnos
+- Buscar turnos por número
+- Listar todos los turnos registrados
+- Modificar turnos existentes
+- Eliminar turnos
 
 ## 🧑‍💻 Datos solicitados por teclado
 
-Al generar un turno, el sistema solicita:
+Para la carga de un turno, el sistema solicita:
 
 - Nombre
 - Apellido
@@ -26,7 +22,15 @@ Al generar un turno, el sistema solicita:
 - Hora del turno (HH:MM)
 - Motivo del turno
 
-El **número de turno** se genera automáticamente de forma aleatoria y única.
+El número de turno se genera automáticamente y sirve como identificador único.
 
-Cada turno se guarda en una línea con el siguiente formato:
+## 🛡️ Validaciones implementadas
+
+- Control de formato de fecha y hora
+- Evita turnos duplicados en la misma fecha y hora
+- Evita la repetición del número de turno
+- Validación de opciones ingresadas en el menú
+- Control de existencia del archivo de datos
+
+on el siguiente formato:
 
