@@ -56,6 +56,46 @@ def pedirHora():
             continue
 
         return hora
+    
+def AltaTurno():
+
+    while True:
+
+        limpiarPantalla()
+
+        nombre = input("Ingrese su nombre: ")    
+        apellido = input("Ingrese su apellido: ")
+
+        fecha = pedirFecha()
+        hora = pedirHora()
+
+        motivo = input("Ingrese el motivo del turno: ")
+
+        numeroTurno = random.randrange(1,1000)
+
+        limpiarPantalla()
+
+        print("==== TURNO GENERADO ====\n")
+        print(f"N° de Turno: {numeroTurno}")
+        print(f"Nombre: {nombre}")
+        print(f"Apellido: {apellido}")
+        print(f"Fecha: {fecha}")
+        print(f"Hora: {hora}")
+        print(f"Motivo: {motivo}")
+        print("==========================")
+
+        with open("turnos.txt","a",encoding="utf-8") as archivo:
+            archivo.write(f"{numeroTurno}|{nombre}|{apellido}|{fecha}|{hora}|{motivo}")
+
+        respuesta = input("¿Desea agregar otro turno? (s/n): ").lower()
+
+        while respuesta != 's' and respuesta != 'n':
+
+            input("ERROR: DEBES INGRESAR 's' o 'n'.\n")
+            respuesta = input("¿Desea agregar otro turno? (s/n): ").lower()
+
+        if respuesta == 'n':
+            return    
 
 
 def Salir():
@@ -88,7 +128,7 @@ def MenuPrincipal():
     opcion = int(opcion)
 
     if opcion == 1:
-        #AltaTurno()
+        AltaTurno()
     elif opcion == 2:
         #BuscarTurnoPorNumero
     elif opcion == 3:
