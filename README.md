@@ -31,6 +31,3 @@ El número de turno se genera automáticamente y sirve como identificador único
 - Evita la repetición del número de turno
 - Validación de opciones ingresadas en el menú
 - Control de existencia del archivo de datos
-
-on el siguiente formato:
-
