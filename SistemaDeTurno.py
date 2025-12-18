@@ -57,6 +57,35 @@ def pedirHora():
 
         return hora
     
+def numeroDeTurnoExiste(numeroTurno):
+
+    if not os.path.exists("turnos.txt"):
+        return False
+
+    with open("turnos.txt","r",encoding="utf-8") as archivo:
+
+        for linea in archivo:
+            partes = linea.strip().split("|")
+            if partes[0] == numeroTurno:
+                return True    
+    
+    return False
+
+def turnoFechayHoraExiste(fecha,hora):
+
+    if not os.path.exists("turnos.txt"):
+        return False
+    
+    with open("turnos.txt","r",encoding="utf-8") as archivo:
+
+        for linea in archivo:
+            partes = linea.strip().split("|")
+            if partes[3] == fecha and partes[4] == hora:
+                return True
+
+    return False        
+
+
 def AltaTurno():
 
     while True:
