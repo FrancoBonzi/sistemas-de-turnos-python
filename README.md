@@ -1,6 +1,9 @@
 # 📅 Sistema de Turnos en Python
 
-Mini aplicación de consola desarrollada en **Python**, que permite la gestión básica de turnos utilizando archivos de texto.  
+## 📌 Descripción del proyecto
+
+Aplicación de consola desarrollada en Python, orientada a la gestión de turnos.
+Permite realizar operaciones de alta, consulta, listado, modificación y eliminación de turnos, utilizando archivos de texto para el almacenamiento de la información.
 
 ## 🧩 Funcionalidades
 
